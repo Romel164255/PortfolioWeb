@@ -1,0 +1,296 @@
+body,
+#root {
+  background-color: #121212; /* Midnight Black */
+  min-height: 100vh;
+  color: #E0E0E0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings with Tron orange */
+h1, h2, h3, h4, h5, h6 {
+  color: #FF6F00; /* Tron Legacy orange */
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* Basic text */
+p, span, a, label, input, button, li, th, td {
+  color: #E0E0E0;
+}
+
+/* NAVBAR with midnight black background and no underline on links */
+.Navbar {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  gap: 30px;
+  padding: 15px 20px;
+  background-color: #121212;
+  box-shadow: 0 0 15px #FF6F0033; /* subtle orange glow */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.Navbar a {
+  color: #E0E0E0;
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 4px;
+  text-decoration: none; /* remove underline */
+  transition: color 0.3s;
+}
+
+.Navbar a:hover,
+.Navbar a.active {
+  color: #FF6F00;
+  border-bottom: none;
+}
+
+/* LOGIN FORM container with midnight black background */
+.Loginform {
+  min-height: 100vh;
+  background: #121212; /* Midnight Black */
+  padding: 3rem 3rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 25px #FF6F0077;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 360px;
+  justify-content: center;
+}
+
+/* Form title */
+.Loginform h2 {
+  color: #FF6F00;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* Form structure */
+.Loginform form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Input fields with dark gray background and orange border */
+.Loginform input[type="email"],
+.Loginform input[type="password"] {
+  background: #1E1E1E; /* very dark gray */
+  border: 1.5px solid #FF6F00;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 8px;
+  color: #E0E0E0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: inset 0 0 10px #000000;
+}
+
+.Loginform input[type="email"]:focus,
+.Loginform input[type="password"]:focus {
+  border-color: #FFA500; /* brighter orange on focus */
+  box-shadow: 0 0 8px #FFA500AA;
+}
+
+/* Submit button with Tron orange gradient and shadow */
+.Loginform button[type="submit"] {
+  background: linear-gradient(90deg, #FF6F00 0%, #FFA500 100%);
+  color: #121212;
+  padding: 0.85rem 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.6px;
+  margin-top: 0.7rem;
+  box-shadow: 0 4px 15px #FF6F0077;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.Loginform button[type="submit"]:hover {
+  background: linear-gradient(90deg, #FFA500 10%, #FF6F00 90%);
+  color: #121212;
+  box-shadow: 0 6px 20px #FFA500CC;
+}
+
+/* Error message styling */
+.Loginform p {
+  color: #121212;
+  background: #FF6F00;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  margin: 0.8rem 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 0 10px #FF6F0088;
+}
+
+
+.homepage-1 {
+  padding: 3rem 2rem;
+  background-color: #121212; /* Midnight black */
+  min-height: 100vh;
+  color: #E0E0E0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.homepage-1 h2 {
+  color: #FF6F00; /* Tron orange */
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.project-card {
+  background-color: #1E1E1E; /* Dark gray, distinct from black */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(255, 111, 0, 0.35);
+  padding: 2rem;
+  color: #E0E0E0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 36px rgba(255, 111, 0, 0.55);
+}
+
+.project-card h3 {
+  color: #FF6F00; /* Tron orange */
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.project-card p {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #CCCCCC;
+}
+
+@media (max-width: 480px) {
+  .homepage-1 h2 {
+    font-size: 2rem;
+  }
+  .project-card {
+    padding: 1.5rem;
+  }
+  .project-card h3 {
+    font-size: 1.4rem;
+  }
+  .project-card p {
+    font-size: 1rem;
+  }
+}
+
+.honeycomb-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 900px;
+  margin: 2rem auto;
+  gap: 10px;
+  padding: 1rem;
+}
+
+.hex {
+  position: relative;
+  width: 100px;
+  height: 115px;
+  margin: 0 5px;
+  clip-path: polygon(
+    25% 5.77%, 75% 5.77%, 100% 50%, 75% 94.23%, 25% 94.23%, 0 50%
+  );
+  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hex-in {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 12px;
+  left: 5px;
+  background: #121212;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hex-in img {
+  width: 60%;
+  height: auto;
+  filter: drop-shadow(0 0 5px #1abc9c);
+  transition: filter 0.3s ease;
+}
+
+.hex:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 8px 20px #1abc9ccc;
+}
+
+.hex:hover img {
+  filter: drop-shadow(0 0 10px #16a085);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .hex {
+    width: 80px;
+    height: 92px;
+  }
+  .hex-in {
+    width: 72px;
+    height: 72px;
+    top: 10px;
+    left: 4px;
+  }
+}
+.logout-button {
+  background-color: #121212; /* Midnight black */
+  color: #FF6F00; /* Tron orange */
+  border: 2px solid #FF6F00;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #FF6F00; /* Tron orange */
+  color: #121212; /* Midnight black */
+}
+
+
