@@ -2,7 +2,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import cors from "cors";  // <--- ADD THIS
+import cors from "cors";
 import authRoutes from "./routes/auth.js";
 
 dotenv.config();
@@ -12,11 +12,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Add CORS here before routes
+// ✅ Dynamic CORS (read from .env)
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL (Vite dev server)
-    credentials: true,               // allow cookies
+    origin: process.env.ALLOWED_ORIGINS?.split(","), // multiple allowed origins
+    credentials: true,
   })
 );
 
@@ -24,6 +24,7 @@ app.use(
 app.use("/api", authRoutes);
 
 // ---------- START SERVER ----------
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server running on port ${process.env.PORT || 5000}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
