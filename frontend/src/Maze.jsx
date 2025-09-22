@@ -8,7 +8,7 @@ const techStacks = [
   // Add more stacks as needed
 ];
 
-function TechHoneycomb() {
+function Maze() {
   return (
     <div className="honeycomb-container">
       {techStacks.map(({ id, name, img }) => (
@@ -22,4 +22,4 @@ function TechHoneycomb() {
   );
 }
 
-export default TechHoneycomb;
+export default Maze;

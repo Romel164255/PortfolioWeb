@@ -1,4 +1,4 @@
-import TechHoneycomb from './TechHoneycomb'; // Assuming TechHoneycomb is in the same folder
+import Maze from './Maze'; // Assuming TechHoneycomb is in the same folder
 
 function Home() {
   return (
@@ -17,7 +17,7 @@ function Home() {
 
       {/* Honeycomb Tech Stack Section */}
       <div className="tech-stack-section" style={{ maxWidth: '960px', margin: '0 auto' }}>
-        <TechHoneycomb />
+        <Maze />
       </div>
     </div>
   );
