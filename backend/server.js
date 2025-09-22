@@ -3,10 +3,12 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";           // <--- added
 import authRoutes from "./routes/auth.js";
 
 dotenv.config();
 const app = express();
+const __dirname = path.resolve();  // <--- added
 
 // ---------- MIDDLEWARES ----------
 app.use(express.json());
@@ -22,6 +24,13 @@ app.use(
 
 // ---------- ROUTES ----------
 app.use("/api", authRoutes);
+
+// ---------- SERVE FRONTEND ----------
+app.use(express.static(path.join(__dirname, "frontend/dist"))); // frontend build folder
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
+});
 
 // ---------- START SERVER ----------
 const PORT = process.env.PORT || 5000;
