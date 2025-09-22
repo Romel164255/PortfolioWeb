@@ -1,14 +1,18 @@
-// server.js
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path";           // <--- added
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 
 dotenv.config();
+
 const app = express();
-const __dirname = path.resolve();  // <--- added
+
+// Fix __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ---------- MIDDLEWARES ----------
 app.use(express.json());
@@ -17,19 +21,20 @@ app.use(cookieParser());
 // ✅ Dynamic CORS (read from .env)
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(","), // multiple allowed origins
+    origin: process.env.ALLOWED_ORIGINS?.split(","), 
     credentials: true,
   })
 );
 
-// ---------- ROUTES ----------
+// ---------- API ROUTES ----------
 app.use("/api", authRoutes);
 
 // ---------- SERVE FRONTEND ----------
-app.use(express.static(path.join(__dirname, "frontend/dist"))); // frontend build folder
+const buildPath = path.join(__dirname, "frontend", "dist");
+app.use(express.static(buildPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 // ---------- START SERVER ----------
