@@ -11,10 +11,10 @@ function Admin() {
 
   useEffect(() => {
     const fetchData = async () => {
-      let token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("accessToken");
 
       try {
-        const res = await axios.get("http://localhost:5000/api/admin", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setMessage(res.data.message);
@@ -22,10 +22,10 @@ function Admin() {
       } catch (err) {
         // Try refresh
         try {
-          const refreshRes = await axios.post("http://localhost:5000/api/refresh");
+          const refreshRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/refresh`);
           localStorage.setItem("accessToken", refreshRes.data.accessToken);
 
-          const retryRes = await axios.get("http://localhost:5000/api/admin", {
+          const retryRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin`, {
             headers: { Authorization: `Bearer ${refreshRes.data.accessToken}` }
           });
           setMessage(retryRes.data.message);
@@ -40,7 +40,7 @@ function Admin() {
   }, []);
 
   const logout = async () => {
-    await axios.post("http://localhost:5000/api/logout", {}, { withCredentials: true });
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/logout`, {}, { withCredentials: true });
     localStorage.removeItem("accessToken");
     navigate("/login");
   };
@@ -49,7 +49,7 @@ function Admin() {
     <div>
       <h1>{message || "Loading..."}</h1>
       <p>Total Admin Visits: {visits}</p>
-      <button className="logout-button"  onClick={logout}>Logout</button>
+      <button className="logout-button" onClick={logout}>Logout</button>
     </div>
   );
 }
