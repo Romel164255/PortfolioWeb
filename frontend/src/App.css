@@ -7,11 +7,6 @@ body,
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 /* Headings soft blue */
@@ -27,14 +22,14 @@ p, span, a, label, input, button, li, th, td {
   color: #2C3E50;
 }
 
-/* Navbar */
+/* Navbar stays top and wide */
 .Navbar {
   display: flex;
   justify-content: center;
   gap: 30px;
   padding: 15px 20px;
   background-color: #FFFFFF;
-  border-radius: 10px;
+  width: 100%;
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
@@ -54,21 +49,26 @@ p, span, a, label, input, button, li, th, td {
   color: #0077CC;
 }
 
-/* Login form (centered box) */
+/* Login form centered box */
 .Loginform {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background: #FFFFFF;
   padding: 3rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 0 30px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 360px;
   max-width: 90vw;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Title */
+/* Login heading */
 .Loginform h2 {
   color: #0077CC;
   margin-bottom: 2rem;
@@ -91,7 +91,6 @@ p, span, a, label, input, button, li, th, td {
   padding: 0.8rem 1.1rem;
   margin-bottom: 1.2rem;
   border-radius: 8px;
-  color: #2C3E50;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease, background 0.3s ease;
@@ -103,7 +102,7 @@ p, span, a, label, input, button, li, th, td {
   background: #E8F4FF;
 }
 
-/* CTA Button */
+/* Submit button */
 .Loginform button[type="submit"] {
   background: #0077CC;
   color: #FFFFFF;
@@ -133,12 +132,12 @@ p, span, a, label, input, button, li, th, td {
   text-align: center;
 }
 
-/* Homepage areas */
+/* Homepage layout */
 .homepage-1 {
   padding: 3rem 2rem;
-  background-color: #F4F7FA;
   min-height: 100vh;
-  color: #2C3E50;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .homepage-1 h2 {
@@ -149,25 +148,25 @@ p, span, a, label, input, button, li, th, td {
   margin-bottom: 2rem;
 }
 
-/* Projects grid cards */
+/* Projects grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
   padding: 0 1rem;
 }
 
+/* Project cards */
 .project-card {
   background-color: #FFFFFF;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .project-card:hover {
@@ -182,7 +181,6 @@ p, span, a, label, input, button, li, th, td {
 }
 
 .project-card p {
-  flex-grow: 1;
   color: #33475B;
 }
 
