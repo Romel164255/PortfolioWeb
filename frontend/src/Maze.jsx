@@ -1,11 +1,15 @@
+import expressImg from './assets/express.png';
+import nodejsImg from './assets/nodejs.png';
+import postgressImg from './assets/postgress.png';
+import reactImg from './assets/react.png';
+// Import other images as needed
+
 const techStacks = [
-  { id: 1, name: 'react', img: './assets/react.png' },
-  { id: 2, name: 'Node.js', img: '/images/node.png' },
-  { id: 3, name: 'Express', img: '/images/express.png' },
-  { id: 4, name: 'MongoDB', img: '/images/mongodb.png' },
-  { id: 5, name: 'Python', img: '/images/python.png' },
-  { id: 6, name: 'TensorFlow', img: '/images/tensorflow.png' },
-  // Add more stacks as needed
+  { id: 1, name: 'React', img: reactImg },
+  { id: 2, name: 'Node.js', img: nodejsImg },
+  { id: 3, name: 'Express', img: expressImg },
+  { id: 4, name: 'Postgres', img: postgressImg },
+  // Add more stacks as needed with imported images
 ];
 
 function Maze() {
