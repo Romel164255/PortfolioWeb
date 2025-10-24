@@ -1,50 +1,46 @@
-// routes/auth.js
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 const router = express.Router();
 
-// Temporary in-memory user store (replace with DB later)
-let adminUser = {
-  email: process.env.ADMIN_EMAIL,
-  passwordHash: bcrypt.hashSync(process.env.ADMIN_PASSWORD, 10), // hashed
-};
+// Use plain text email/password from .env
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
+// Hash admin password once
+const passwordHash = bcrypt.hashSync(ADMIN_PASSWORD, 10);
+
+// Visit counter (demo)
 let visitCount = 0;
 
 // ---------------- LOGIN ----------------
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if (email !== adminUser.email) {
+  if (email !== ADMIN_EMAIL) {
     return res.status(401).json({ error: "Invalid email or password" });
   }
 
-  const validPass = await bcrypt.compare(password, adminUser.passwordHash);
+  const validPass = await bcrypt.compare(password, passwordHash);
   if (!validPass) {
     return res.status(401).json({ error: "Invalid email or password" });
   }
 
-  // issue access + refresh tokens
   const accessToken = jwt.sign({ email }, process.env.ACCESS_SECRET, { expiresIn: "15m" });
   const refreshToken = jwt.sign({ email }, process.env.REFRESH_SECRET, { expiresIn: "7d" });
 
-  // send tokens as HttpOnly cookies
-  res.cookie("accessToken", accessToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // true in prod
-    sameSite: "None",
-  });
-
-  res.cookie("refreshToken", refreshToken, {
+  // Use secure: false in dev if localhost
+  const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "None",
-  });
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+  };
+
+  res.cookie("accessToken", accessToken, cookieOptions);
+  res.cookie("refreshToken", refreshToken, cookieOptions);
 
   res.json({ message: "Login successful" });
 });
@@ -63,7 +59,7 @@ router.post("/refresh", (req, res) => {
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
     });
 
     res.json({ message: "Access token refreshed" });
@@ -83,7 +79,7 @@ router.get("/admin", (req, res) => {
     res.json({
       message: `Welcome Admin: ${decoded.email}`,
       visits: visitCount,
-      note: "This resets when you restart the server (use DB for permanent storage)",
+      note: "This resets when server restarts (use DB for permanent storage)",
     });
   } catch (err) {
     res.status(403).json({ error: "Invalid or expired token" });

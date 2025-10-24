@@ -18,10 +18,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Dynamic CORS (read from .env)
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(","), 
+    origin: process.env.ALLOWED_ORIGINS?.split(","),
     credentials: true,
   })
 );
@@ -33,6 +32,7 @@ app.use("/api", authRoutes);
 const buildPath = path.join(__dirname, "frontend", "dist");
 app.use(express.static(buildPath));
 
+// Handle React routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
