@@ -32,8 +32,8 @@ app.use("/api", authRoutes);
 const buildPath = path.join(__dirname, "frontend", "dist");
 app.use(express.static(buildPath));
 
-// Handle React routes
-app.get("*", (req, res) => {
+// Handle all other routes except API
+app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
