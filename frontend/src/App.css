@@ -201,3 +201,61 @@ p, span, a, label, input, button, li, th, td {
   background-color: #0077CC;
   color: #FFFFFF;
 }
+
+
+.honeycomb-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  gap: 10px;
+  padding-top: 50px;
+}
+
+.hex {
+  width: 120px;
+  height: 138px;
+  background-color: transparent;
+  position: relative;
+  margin: 5px;
+  clip-path: polygon(
+    50% 0%,
+    93% 25%,
+    93% 75%,
+    50% 100%,
+    7% 75%,
+    7% 25%
+  );
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex:nth-child(odd) {
+  margin-top: 35px;
+}
+
+.hex-in {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hex img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.hex:hover img {
+  transform: scale(1.1);
+}
+
+
+.hex:hover {
+  background: #222;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
