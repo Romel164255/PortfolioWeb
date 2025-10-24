@@ -2,17 +2,14 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-import authRoutes from "./routes/auth.js";
+// path and fileURLToPath are no longer needed
+import authRoutes from "./routes/auth.js"; // This assumes routes is a sibling folder to server.js
 
 dotenv.config();
 
 const app = express();
 
-// Fix __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// __dirname fix is no longer needed
 
 // ---------- MIDDLEWARES ----------
 app.use(express.json());
@@ -25,17 +22,10 @@ app.use(
   })
 );
 
-// ---------- API ROUTES ----------
+// ---------- API ROUTES ONLY (Vercel handles the frontend) ----------
 app.use("/api", authRoutes);
 
-// ---------- SERVE FRONTEND ----------
-const buildPath = path.join(__dirname, "frontend", "dist");
-app.use(express.static(buildPath));
-
-// Handle all other routes except API
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
+// The frontend serving logic is correctly removed
 
 // ---------- START SERVER ----------
 const PORT = process.env.PORT || 5000;
