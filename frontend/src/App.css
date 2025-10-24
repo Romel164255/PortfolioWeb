@@ -6,6 +6,13 @@ body,
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+
+
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+
 }
 
 /* Headings with Tron orange */
@@ -52,7 +59,9 @@ p, span, a, label, input, button, li, th, td {
 
 /* LOGIN FORM container with midnight black background */
 .Loginform {
+
   min-height: 100vh;
+
   background: #121212; /* Midnight Black */
   padding: 3rem 3rem 2.5rem;
   border-radius: 16px;
@@ -60,8 +69,14 @@ p, span, a, label, input, button, li, th, td {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   min-width: 360px;
   justify-content: center;
+  justify-content: center;
+  width: 360px; /* fixed width for the form */
+  max-width: 90vw; /* responsive on smaller screens */
+  box-sizing: border-box;
+
 }
 
 /* Form title */
@@ -135,6 +150,7 @@ p, span, a, label, input, button, li, th, td {
   text-align: center;
   box-shadow: 0 0 10px #FF6F0088;
 }
+
 
 
 .homepage-1 {
