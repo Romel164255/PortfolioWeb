@@ -27,9 +27,7 @@ function Contact() {
           Contact
         </h2>
 
-        <p style={{ marginBottom: "1.5rem", color: "#aaaaaa" }}>
-          Everything you seek is already in front of you.
-        </p>
+        
 
         <img
           src={contactImg}
