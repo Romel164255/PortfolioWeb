@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import Maze from '../components/Maze'; // Assuming TechHoneycomb is in the same folder
+import { getComments } from "../services/comments";
+import CommentForm from "../components/comments/CommentForm";
+import CommentList from "../components/comments/CommentList";
+
 
 function Home() {
+
+    const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getComments().then((res) => setComments(res.data));
+  }, []);
+
+
+
   return (
     <div className="home-container" style={{ padding: '2rem', backgroundColor: '#121212', minHeight: '100vh', color: '#E0E0E0', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
       
@@ -19,6 +33,17 @@ function Home() {
       <div className="tech-stack-section" style={{ maxWidth: '960px', margin: '0 auto' }}>
         <Maze />
       </div>
+
+
+      <section>
+        <h2>Leave a message</h2>
+
+        <CommentForm
+          onAdd={(c) => setComments([c, ...comments])}
+        />
+
+        <CommentList comments={comments} />
+      </section>
     </div>
   );
 }

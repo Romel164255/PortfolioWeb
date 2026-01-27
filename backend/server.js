@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 // path and fileURLToPath are no longer needed
 import authRoutes from "./routes/auth.js"; // This assumes routes is a sibling folder to server.js
+import commentsRoutes from "./routes/comments.js";
+
 
 dotenv.config();
 
@@ -24,6 +26,7 @@ app.use(
 
 // ---------- API ROUTES ONLY (Vercel handles the frontend) ----------
 app.use("/api", authRoutes);
+app.use("/api/comments", commentsRoutes);
 
 // The frontend serving logic is correctly removed
 
