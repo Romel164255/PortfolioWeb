@@ -1,7 +1,7 @@
-import expressImg from './assets/express.png';
-import nodejsImg from './assets/nodejs.png';
-import postgressImg from './assets/postgress.png';
-import reactImg from './assets/react.png';
+import expressImg from '../assets/express.png';
+import nodejsImg from '../assets/nodejs.png';
+import postgressImg from '../assets/postgress.png';
+import reactImg from '../assets/react.png';
 // Import other images as needed
 
 const techStacks = [
