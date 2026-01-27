@@ -1,9 +1,21 @@
 import { useState } from "react";
 import CommentForm from "./CommentForm";
 
+function countTotalReplies(comment) {
+  if (!comment.replies || comment.replies.length === 0) return 0;
+
+  return comment.replies.reduce(
+    (total, reply) => total + 1 + countTotalReplies(reply),
+    0
+  );
+}
+
 function CommentItem({ comment, onReply }) {
   const [showReplies, setShowReplies] = useState(false);
   const [replying, setReplying] = useState(false);
+
+  // ✅ JS logic goes here
+  const totalReplies = countTotalReplies(comment);
 
   return (
     <div className="comment">
@@ -13,11 +25,13 @@ function CommentItem({ comment, onReply }) {
       <div className="comment-actions">
         <button onClick={() => setReplying(!replying)}>Reply</button>
 
-        {comment.replies.length > 0 && (
+        {totalReplies > 0 && (
           <button onClick={() => setShowReplies(!showReplies)}>
             {showReplies
               ? "Hide replies"
-              : `View ${comment.replies.length} replies`}
+              : `View ${totalReplies} ${
+                  totalReplies === 1 ? "reply" : "replies"
+                }`}
           </button>
         )}
       </div>
