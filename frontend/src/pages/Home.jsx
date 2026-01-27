@@ -1,4 +1,4 @@
-import Maze from './Maze'; // Assuming TechHoneycomb is in the same folder
+import Maze from '../components/Maze'; // Assuming TechHoneycomb is in the same folder
 
 function Home() {
   return (
