@@ -307,3 +307,29 @@ form button {
 .hex-in:hover img {
   transform: scale(1.15);
 }
+
+/*=====================================*/
+
+
+.comment {
+  background: #1e1e1e;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.comment-actions button {
+  background: none;
+  border: none;
+  color: #8ab4f8;
+  cursor: pointer;
+  margin-right: 14px;
+  font-size: 14px;
+}
+
+.replies {
+  margin-left: 36px;
+  padding-left: 16px;
+  border-left: 2px solid #2c2c2c;
+}
+

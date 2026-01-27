@@ -1,13 +1,14 @@
-function CommentList({ comments }) {
-  if (!comments.length) return <p>No comments yet.</p>;
+import CommentItem from "./CommentItem";
 
+function CommentList({ comments, onReply }) {
   return (
     <div>
       {comments.map((c) => (
-        <div key={c.id}>
-          <strong>{c.name}</strong>
-          <p>{c.message}</p>
-        </div>
+        <CommentItem
+          key={c.id}
+          comment={c}
+          onReply={onReply}
+        />
       ))}
     </div>
   );
