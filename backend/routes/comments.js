@@ -5,26 +5,30 @@ const router = express.Router();
 
 // GET comments
 router.get("/", async (req, res) => {
-  const result = await pool.query(
-    "SELECT * FROM comments ORDER BY created_at DESC"
-  );
+  const result = await pool.query(`
+    SELECT id, name, message, parent_id, created_at
+    FROM comments
+    ORDER BY created_at DESC
+  `);
+
   res.json(result.rows);
 });
 
 // POST comment
 router.post("/", async (req, res) => {
-  const { name, message } = req.body;
-
-  if (!name || !message) {
-    return res.status(400).json({ error: "Missing fields" });
-  }
+  const { name, message, parent_id = null } = req.body;
 
   const result = await pool.query(
-    "INSERT INTO comments (name, message) VALUES ($1, $2) RETURNING *",
-    [name, message]
+    `
+    INSERT INTO comments (name, message, parent_id)
+    VALUES ($1, $2, $3)
+    RETURNING *
+    `,
+    [name, message, parent_id]
   );
 
-  res.status(201).json(result.rows[0]);
+  res.json(result.rows[0]);
 });
+
 
 export default router;
