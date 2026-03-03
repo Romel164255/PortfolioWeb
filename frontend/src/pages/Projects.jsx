@@ -12,8 +12,13 @@ function Projects() {
     },
     {
       id: 2,
-      title: "Project Two",
-      description: "Description for project two goes here."
+      title: "URL Shortener Application",
+      description:
+      "Built a scalable URL shortener implementing Redis caching for O(1) redirect performance, MongoDB for persistent storage, and RESTful API design. Optimized database load using cache-hit/cache-miss strategy.",
+      tech: ["React", "Node.js", "Express", "MongoDB", "Redis"],
+      liveLink: "https://url-shortener-taupe-gamma.vercel.app/",
+      githubLink: "https://github.com/Romel164255/url-shortener.git",
+      image: "/images/urlshortener.png"
     },
     {
       id: 3,
