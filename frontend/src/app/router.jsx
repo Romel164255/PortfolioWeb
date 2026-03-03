@@ -4,6 +4,7 @@ import Projects from "../pages/Projects";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Admin from "../pages/Admin";
+import PrivateRoute from "../components/PrivateRoute";
 
 function Router() {
   return (
@@ -12,7 +13,16 @@ function Router() {
       <Route path="/projects" element={<Projects />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/admin" element={<Admin />} />
+
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <Admin />
+          </PrivateRoute>
+        }
+      />
+
       <Route path="*" element={<Home />} />
     </Routes>
   );

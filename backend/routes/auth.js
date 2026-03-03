@@ -23,28 +23,13 @@ router.post("/login", async (req, res) => {
   if (!valid)
     return res.status(401).json({ error: "Invalid credentials" });
 
-  const accessToken = jwt.sign({ email }, process.env.ACCESS_SECRET, {
-    expiresIn: "15m",
-  });
+  const accessToken = jwt.sign(
+    { email },
+    process.env.ACCESS_SECRET,
+    { expiresIn: "15m" }
+  );
 
   res.json({ accessToken });
-});
-
-/* ---------- REFRESH ---------- */
-router.post("/refresh", (req, res) => {
-  const { token } = req.body;
-
-  if (!token) return res.status(401).json({ error: "No token" });
-
-  try {
-    const decoded = jwt.verify(token, process.env.REFRESH_SECRET);
-    const newToken = jwt.sign({ email: decoded.email }, process.env.ACCESS_SECRET, {
-      expiresIn: "15m",
-    });
-    res.json({ accessToken: newToken });
-  } catch {
-    res.status(403).json({ error: "Invalid token" });
-  }
 });
 
 /* ---------- ADMIN DASHBOARD ---------- */
@@ -55,25 +40,30 @@ router.get("/admin", async (req, res) => {
   try {
     jwt.verify(token, process.env.ACCESS_SECRET);
 
-    const visitorResult = await pool.query(
+    const visitors = await pool.query(
       `SELECT COUNT(*) FROM visitors`
     );
 
-    const messagesResult = await pool.query(`
-      SELECT id, name, message, user_id, parent_id, created_at
+    const messages = await pool.query(`
+      SELECT id, name, message, parent_id, created_at
       FROM comments
       ORDER BY created_at DESC
     `);
 
     res.json({
-      totalVisitors: visitorResult.rows[0].count,
-      totalMessages: messagesResult.rowCount,
-      messages: messagesResult.rows,
+      totalVisitors: visitors.rows[0].count,
+      totalMessages: messages.rowCount,
+      messages: messages.rows,
     });
 
   } catch {
     res.status(403).json({ error: "Invalid or expired token" });
   }
+});
+
+/* ---------- LOGOUT ---------- */
+router.post("/logout", (req, res) => {
+  res.json({ message: "Logged out successfully" });
 });
 
 export default router;

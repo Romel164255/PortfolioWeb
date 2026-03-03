@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-axios.defaults.withCredentials = true; // send cookies with requests
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,14 +10,17 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, {
-        email,
-        password
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/login`,
+        { email, password }
+      );
+
       localStorage.setItem("accessToken", res.data.accessToken);
       navigate("/admin");
-    } catch (err) {
+
+    } catch {
       setError("Invalid credentials");
     }
   };
@@ -27,7 +28,9 @@ function Login() {
   return (
     <div className="Loginform">
       <h2>Login</h2>
+
       {error && <p style={{ color: "red" }}>{error}</p>}
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -35,12 +38,14 @@ function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <button type="submit">Login</button>
       </form>
     </div>
