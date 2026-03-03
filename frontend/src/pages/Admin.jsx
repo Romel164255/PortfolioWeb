@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { adminData, refresh, logout } from "../services/auth";
+import { adminData } from "../services/auth";
 
 function Admin() {
   const [data, setData] = useState(null);
@@ -13,33 +13,38 @@ function Admin() {
         const res = await adminData(token);
         setData(res.data);
       } catch {
-        try {
-          const r = await refresh();
-          localStorage.setItem("accessToken", r.data.accessToken);
-          const res = await adminData(r.data.accessToken);
-          setData(res.data);
-        } catch {
-          navigate("/login");
-        }
+        navigate("/login");
       }
     };
     load();
   }, [navigate]);
 
-  const handleLogout = async () => {
-    await logout();
-    localStorage.removeItem("accessToken");
-    navigate("/login");
-  };
-
   if (!data) return <p>Loading…</p>;
 
   return (
-    <>
-      <h1>{data.message}</h1>
-      <p>Visits: {data.visits}</p>
-      <button onClick={handleLogout}>Logout</button>
-    </>
+    <div style={{ padding: "2rem" }}>
+      <h1>Admin Dashboard</h1>
+
+      <h3>Total Visitors: {data.totalVisitors}</h3>
+      <h3>Total Messages: {data.totalMessages}</h3>
+
+      <hr />
+
+      <h2>Messages</h2>
+
+      {data.messages.map((msg) => (
+        <div key={msg.id} style={{
+          background: "#1a1f2b",
+          padding: "1rem",
+          marginBottom: "1rem",
+          borderRadius: "8px"
+        }}>
+          <strong>{msg.name}</strong>
+          <p>{msg.message}</p>
+          <small>{new Date(msg.created_at).toLocaleString()}</small>
+        </div>
+      ))}
+    </div>
   );
 }
 

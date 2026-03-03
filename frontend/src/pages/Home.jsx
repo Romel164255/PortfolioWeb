@@ -28,9 +28,12 @@ function Home() {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getComments().then((res) => setComments(res.data));
-  }, []);
+  getComments().then((res) => setComments(res.data));
 
+  fetch("/api/track-visit", {
+    method: "POST",
+  });
+}, []);
   /* ---------- handle new comments & replies ---------- */
   const handleAdd = (comment) => {
     setComments((prev) => [comment, ...prev]);

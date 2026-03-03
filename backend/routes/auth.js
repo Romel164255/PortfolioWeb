@@ -2,95 +2,78 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
+import { pool } from "../db.js";
 
 dotenv.config();
 const router = express.Router();
 
-// Use plain text email/password from .env
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-// Hash admin password once
 const passwordHash = bcrypt.hashSync(ADMIN_PASSWORD, 10);
 
-// Visit counter (demo)
-let visitCount = 0;
-
-// ---------------- LOGIN ----------------
+/* ---------- LOGIN ---------- */
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if (email !== ADMIN_EMAIL) {
-    return res.status(401).json({ error: "Invalid email or password" });
-  }
+  if (email !== ADMIN_EMAIL)
+    return res.status(401).json({ error: "Invalid credentials" });
 
-  const validPass = await bcrypt.compare(password, passwordHash);
-  if (!validPass) {
-    return res.status(401).json({ error: "Invalid email or password" });
-  }
+  const valid = await bcrypt.compare(password, passwordHash);
+  if (!valid)
+    return res.status(401).json({ error: "Invalid credentials" });
 
-  const accessToken = jwt.sign({ email }, process.env.ACCESS_SECRET, { expiresIn: "15m" });
-  const refreshToken = jwt.sign({ email }, process.env.REFRESH_SECRET, { expiresIn: "7d" });
+  const accessToken = jwt.sign({ email }, process.env.ACCESS_SECRET, {
+    expiresIn: "15m",
+  });
 
-  // Use secure: false in dev if localhost
-  const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-  };
-
-  res.cookie("accessToken", accessToken, cookieOptions);
-  res.cookie("refreshToken", refreshToken, cookieOptions);
-
-  res.json({ message: "Login successful" });
+  res.json({ accessToken });
 });
 
-// ---------------- REFRESH TOKEN ----------------
+/* ---------- REFRESH ---------- */
 router.post("/refresh", (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.status(401).json({ error: "No refresh token" });
+  const { token } = req.body;
+
+  if (!token) return res.status(401).json({ error: "No token" });
 
   try {
-    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
-    const newAccessToken = jwt.sign({ email: decoded.email }, process.env.ACCESS_SECRET, {
+    const decoded = jwt.verify(token, process.env.REFRESH_SECRET);
+    const newToken = jwt.sign({ email: decoded.email }, process.env.ACCESS_SECRET, {
       expiresIn: "15m",
     });
-
-    res.cookie("accessToken", newAccessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-    });
-
-    res.json({ message: "Access token refreshed" });
-  } catch (err) {
-    res.status(403).json({ error: "Invalid or expired refresh token" });
+    res.json({ accessToken: newToken });
+  } catch {
+    res.status(403).json({ error: "Invalid token" });
   }
 });
 
-// ---------------- PROTECTED ROUTE ----------------
-router.get("/admin", (req, res) => {
-  const token = req.cookies.accessToken || req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).json({ error: "No token provided" });
+/* ---------- ADMIN DASHBOARD ---------- */
+router.get("/admin", async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ error: "No token" });
 
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_SECRET);
-    visitCount++;
+    jwt.verify(token, process.env.ACCESS_SECRET);
+
+    const visitorResult = await pool.query(
+      `SELECT COUNT(*) FROM visitors`
+    );
+
+    const messagesResult = await pool.query(`
+      SELECT id, name, message, user_id, parent_id, created_at
+      FROM comments
+      ORDER BY created_at DESC
+    `);
+
     res.json({
-      message: `Welcome Admin: ${decoded.email}`,
-      visits: visitCount,
-      note: "This resets when server restarts (use DB for permanent storage)",
+      totalVisitors: visitorResult.rows[0].count,
+      totalMessages: messagesResult.rowCount,
+      messages: messagesResult.rows,
     });
-  } catch (err) {
+
+  } catch {
     res.status(403).json({ error: "Invalid or expired token" });
   }
-});
-
-// ---------------- LOGOUT ----------------
-router.post("/logout", (req, res) => {
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
-  res.json({ message: "Logged out successfully" });
 });
 
 export default router;
