@@ -29,21 +29,6 @@ function Projects() {
       liveLink: "https://chatty-phi-ten.vercel.app/",
       githubLink: "https://github.com/Romel164255/rChat.git",
       image: "/images/rchat.png"
-    },
-    {
-      id: 4,
-      title: "Project Four",
-      description: "Description for project four goes here."
-    },
-    {
-      id: 5,
-      title: "Project Five",
-      description: "Description for project five goes here."
-    },
-    {
-      id: 6,
-      title: "Project Six",
-      description: "Description for project six goes here."
     }
   ];
 
