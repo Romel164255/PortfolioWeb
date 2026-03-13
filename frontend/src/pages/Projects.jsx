@@ -22,8 +22,13 @@ function Projects() {
     },
     {
       id: 3,
-      title: "Project Three",
-      description: "Description for project three goes here."
+      title: "Real-Time Chat Application",
+      description:
+      "A full-stack real-time chat application with Firebase authentication and WebSocket-based messaging using Socket.IO. Implemented secure token verification and persistent message storage using PostgreSQL for reliable chat history.",
+      tech: ["React", "Node.js", "Express", "Socket.IO", "PostgreSQL", "Firebase Auth"],
+      liveLink: "https://chatty-phi-ten.vercel.app/",
+      githubLink: "https://github.com/Romel164255/rChat.git",
+      image: "/images/rchat.png"
     },
     {
       id: 4,
