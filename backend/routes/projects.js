@@ -2,19 +2,28 @@ import express from "express";
 
 const router = express.Router();
 
-/* ---------- GET PROJECT STATS ---------- */
+async function safeFetch(url) {
+  try {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      return { error: "service unavailable" };
+    }
+
+    return await res.json();
+  } catch {
+    return { error: "service unavailable" };
+  }
+}
+
 router.get("/stats", async (req, res) => {
   try {
 
-    const [rchatRes, shortenerRes, ecommerceRes] = await Promise.all([
-      fetch("https://chatty-phi-ten.vercel.app/api/stats"),
-      fetch("https://url-shortener-taupe-gamma.vercel.app/api/stats"),
-      fetch("https://e-commerce-hazel-chi.vercel.app/api/stats")
+    const [rchat, shortener, ecommerce] = await Promise.all([
+      safeFetch("https://chatty-phi-ten.vercel.app/api/stats"),
+      safeFetch("https://url-shortener-taupe-gamma.vercel.app/api/stats"),
+      safeFetch("https://e-commerce-hazel-chi.vercel.app/api/stats")
     ]);
-
-    const rchat = await rchatRes.json();
-    const shortener = await shortenerRes.json();
-    const ecommerce = await ecommerceRes.json();
 
     res.json({
       rchat,
@@ -23,7 +32,7 @@ router.get("/stats", async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error("Stats error:", err);
     res.status(500).json({ error: "Failed to fetch project stats" });
   }
 });
