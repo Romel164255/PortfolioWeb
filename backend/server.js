@@ -4,6 +4,7 @@ import cors from "cors";
 import { pool } from "./db.js";
 import authRoutes from "./routes/auth.js";
 import commentsRoutes from "./routes/comments.js";
+import projectsRoutes from "./routes/projects.js";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use(
 /* ---------- ROUTES ---------- */
 app.use("/api", authRoutes);
 app.use("/api/comments", commentsRoutes);
+
+app.use("/api/projects", projectsRoutes);
 
 /* ---------- VISIT TRACKING ---------- */
 app.post("/api/track-visit", async (req, res) => {
