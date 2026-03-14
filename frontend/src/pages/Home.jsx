@@ -4,7 +4,6 @@ import { getComments } from "../services/comments";
 import CommentForm from "../components/comments/CommentForm";
 import CommentList from "../components/comments/CommentList";
 
-/* ---------- build nested comment tree ---------- */
 function buildCommentTree(comments) {
   const map = {};
   const roots = [];
@@ -28,13 +27,13 @@ function Home() {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-  getComments().then((res) => setComments(res.data));
+    getComments()
+      .then((res) => setComments(res.data))
+      .catch(() => {}); // graceful — page still works without comments
 
-  fetch("/api/track-visit", {
-    method: "POST",
-  });
-}, []);
-  /* ---------- handle new comments & replies ---------- */
+    fetch("/api/track-visit", { method: "POST" }).catch(() => {});
+  }, []);
+
   const handleAdd = (comment) => {
     setComments((prev) => [comment, ...prev]);
   };
@@ -44,68 +43,26 @@ function Home() {
   };
 
   return (
-    <div
-      className="home-container"
-      style={{
-        padding: "2rem",
-        backgroundColor: "#121212",
-        minHeight: "100vh",
-        color: "#E0E0E0",
-        fontFamily:
-          "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      }}
-    >
-      {/* Intro Section */}
-      <div
-        className="intro-section"
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto",
-          marginBottom: "4rem",
-        }}
-      >
-        <h1
-          style={{
-            color: "#8ab4f8",
-            fontWeight: "700",
-            fontSize: "2.5rem",
-            textAlign: "center",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Hi, I’m a self-taught web developer transitioning from sales.
-        </h1>
-        <p
-          style={{
-            fontSize: "1.15rem",
-            lineHeight: 1.6,
-            textAlign: "center",
-            color: "#bdbdbd",
-          }}
-        >
-          I am deeply focused on backend development, building scalable
-          and efficient server-side applications. My goal is to advance
-          into machine learning with a specialization in reinforcement
-          learning.
+    <div className="home-container">
+      {/* Intro */}
+      <div className="intro-section">
+        <h1>Hi, I&apos;m a self-taught web developer transitioning from sales.</h1>
+        <p>
+          I am deeply focused on backend development, building scalable and
+          efficient server-side applications. My goal is to advance into machine
+          learning with a specialization in reinforcement learning.
         </p>
       </div>
 
       {/* Tech Stack */}
-      <div
-        className="tech-stack-section"
-        style={{ maxWidth: "960px", margin: "0 auto" }}
-      >
+      <div className="tech-stack-section">
         <Maze />
       </div>
 
       {/* Comments */}
-      <section style={{ maxWidth: "800px", margin: "4rem auto 0" }}>
-        <h2 style={{ marginBottom: "1rem" }}>Leave a message</h2>
-
-        {/* top-level comment */}
+      <section className="comments-section">
+        <h2>Leave a message</h2>
         <CommentForm onAdd={handleAdd} />
-
-        {/* nested comments */}
         <CommentList
           comments={buildCommentTree(comments)}
           onReply={handleReply}
