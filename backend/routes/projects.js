@@ -4,14 +4,28 @@ const router = express.Router();
 
 async function safeFetch(url) {
   try {
-    const res = await fetch(url);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
 
     if (!res.ok) {
-      return { error: "service unavailable" };
+      return { error: "service unavailable", status: res.status };
     }
 
-    return await res.json();
-  } catch {
+    const data = await res.json();
+
+    // If the upstream itself returned an error object, surface it clearly
+    if (data && data.error) {
+      return { error: data.error, status: res.status };
+    }
+
+    return data;
+  } catch (err) {
+    if (err.name === "AbortError") {
+      return { error: "request timed out" };
+    }
     return { error: "service unavailable" };
   }
 }

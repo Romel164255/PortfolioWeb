@@ -6,6 +6,20 @@ import { getProjectStats } from "../services/Projects";
 /* ─── small helper: render every key/value pair from a stats object ─── */
 function StatBlock({ title, stats }) {
   if (!stats) return null;
+
+  // Service returned an error object
+  if (stats.error) {
+    return (
+      <div className="stat-card project-stat-card">
+        <h4>{title}</h4>
+        <p style={{ color: "var(--text-muted)", fontSize: "0.78rem" }}>
+          ⚠ Service unavailable
+          {stats.status ? ` (HTTP ${stats.status})` : ""}
+        </p>
+      </div>
+    );
+  }
+
   const entries = Object.entries(stats);
 
   return (
