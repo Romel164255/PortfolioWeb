@@ -34,9 +34,9 @@ router.get("/stats", async (req, res) => {
   try {
 
     const [rchat, shortener, ecommerce] = await Promise.all([
-      safeFetch("https://chatty-phi-ten.vercel.app/api/stats"),
-      safeFetch("https://url-shortener-taupe-gamma.vercel.app/api/stats"),
-      safeFetch("https://e-commerce-hazel-chi.vercel.app/api/stats")
+      safeFetch("https://chatty-d7l7.onrender.com/api/stats"),
+      safeFetch("https://url-shortener-edwl.onrender.com/api/stats"),
+      safeFetch("https://e-commerce-hjy2.onrender.com/api/stats")
     ]);
 
     res.json({
