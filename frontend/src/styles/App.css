@@ -5,36 +5,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
 
 :root {
-  /* ── Grayscale Palette ── */
-  --gray-999: #999999;
-  --gray-777: #777777;
-  --gray-555: #555555;
-  --gray-333: #333333;
-  --gray-111: #111111;
+  /* ── Rose / Blush Palette ── */
+  --rose-light:   #FCF8F8;
+  --rose-soft:    #FBEFEF;
+  --rose-mid:     #F9DFDF;
+  --rose-warm:    #F5AFAF;
+  --rose-deep:    #e07878;
+  --rose-muted:   #c85a5a;
 
-  --bg-main:    #111111;
-  --bg-surface: #1a1a1a;
-  --bg-card:    #222222;
-  --bg-hover:   #2a2a2a;
+  --bg-main:    #FCF8F8;
+  --bg-surface: #FBEFEF;
+  --bg-card:    #FCF8F8;
+  --bg-hover:   #F9DFDF;
 
-  --text-primary:   #f4f4f4;
-  --text-secondary: #999999;
-  --text-muted:     #555555;
+  --text-primary:   #2a1414;
+  --text-secondary: #7a3a3a;
+  --text-muted:     #c09090;
 
-  --accent:       #999999;
-  --accent-hover: #bbbbbb;
-  --accent-dim:   rgba(153,153,153,0.08);
-  --accent-glow:  0 0 20px rgba(153,153,153,0.15);
+  --accent:       #F5AFAF;
+  --accent-hover: #e07878;
+  --accent-dim:   rgba(245, 175, 175, 0.18);
+  --accent-glow:  0 0 20px rgba(245, 175, 175, 0.35);
 
-  --border:        #333333;
-  --border-accent: #555555;
+  --border:        #F9DFDF;
+  --border-accent: #F5AFAF;
 
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 14px;
 
-  --shadow-soft:   0 8px 32px rgba(0,0,0,0.7);
-  --shadow-accent: 0 4px 20px rgba(153,153,153,0.12);
+  --shadow-soft:   0 8px 32px rgba(180, 80, 80, 0.10);
+  --shadow-accent: 0 4px 20px rgba(245, 175, 175, 0.22);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -112,7 +113,7 @@ a:hover { color: var(--text-primary); }
   transform: translateX(-50%) scaleX(0);
   width: 70%;
   height: 2px;
-  background: #777777;
+  background: var(--rose-warm);
   border-radius: 2px 2px 0 0;
   transition: transform 0.25s ease;
 }
@@ -186,7 +187,7 @@ a:hover { color: var(--text-primary); }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #555555, transparent);
+  background: linear-gradient(90deg, transparent, var(--rose-warm), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -198,19 +199,19 @@ a:hover { color: var(--text-primary); }
   width: 100%;
   border-radius: var(--radius-sm);
   margin-bottom: 1.4rem;
-  filter: grayscale(40%) contrast(1.05);
+  filter: grayscale(10%) contrast(1.05) sepia(8%);
   border: 1px solid var(--border);
   transition: filter 0.3s ease;
 }
 .project-card:hover .project-image {
-  filter: grayscale(10%) contrast(1.1);
+  filter: grayscale(0%) contrast(1.1) sepia(0%);
 }
 
 .tech-badge {
   display: inline-block;
-  background: rgba(85,85,85,0.15);
-  border: 1px solid #333333;
-  color: #777777;
+  background: rgba(245, 175, 175, 0.12);
+  border: 1px solid var(--rose-mid);
+  color: var(--rose-deep);
   padding: 3px 10px;
   margin: 3px 4px 3px 0;
   border-radius: 2px;
@@ -245,7 +246,7 @@ a:hover { color: var(--text-primary); }
 }
 .project-buttons a:hover {
   background: var(--accent-dim);
-  border-color: #555555;
+  border-color: var(--rose-warm);
   color: var(--text-primary);
 }
 
@@ -315,7 +316,7 @@ a:hover { color: var(--text-primary); }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #555555, transparent);
+  background: linear-gradient(90deg, transparent, var(--rose-warm), transparent);
 }
 
 .Loginform h2 {
@@ -345,14 +346,14 @@ a:hover { color: var(--text-primary); }
 .Loginform input::placeholder { color: var(--text-muted); }
 .Loginform input:focus {
   outline: none;
-  border-color: #555555;
-  box-shadow: 0 0 0 3px rgba(85,85,85,0.12);
+  border-color: var(--rose-warm);
+  box-shadow: 0 0 0 3px rgba(245, 175, 175, 0.18);
 }
 
 .Loginform button {
-  background: #333333;
+  background: var(--rose-mid);
   color: var(--text-primary);
-  border: 1px solid #555555;
+  border: 1px solid var(--rose-warm);
   border-radius: var(--radius-sm);
   padding: 0.85rem;
   font-weight: 700;
@@ -366,17 +367,17 @@ a:hover { color: var(--text-primary); }
   width: 100%;
 }
 .Loginform button:hover {
-  background: #555555;
-  border-color: #777777;
+  background: var(--rose-warm);
+  border-color: var(--rose-deep);
 }
 
 .error-msg {
-  color: #cf6679;
+  color: #b03a3a;
   font-size: 0.82rem;
   text-align: center;
   padding: 0.5rem;
-  background: rgba(207,102,121,0.08);
-  border: 1px solid rgba(207,102,121,0.2);
+  background: rgba(245, 175, 175, 0.15);
+  border: 1px solid rgba(245, 175, 175, 0.45);
   border-radius: var(--radius-sm);
   margin-bottom: 0.5rem;
 }
@@ -389,7 +390,6 @@ a:hover { color: var(--text-primary); }
   min-height: 100vh;
 }
 
-/* admin header row: title + logout button side by side */
 .admin-header {
   display: flex;
   align-items: center;
@@ -409,9 +409,9 @@ a:hover { color: var(--text-primary); }
   padding: 0.5rem 1.2rem;
 }
 .logout-btn:hover {
-  border-color: #cf6679;
-  color: #cf6679;
-  background: rgba(207,102,121,0.06);
+  border-color: var(--rose-deep);
+  color: var(--rose-deep);
+  background: rgba(224, 120, 120, 0.07);
 }
 
 .stats-row {
@@ -439,7 +439,6 @@ a:hover { color: var(--text-primary); }
   margin-bottom: 0.4rem;
 }
 
-/* big number variant (visitor / message count) */
 .stat-card > span {
   font-family: "Syne", sans-serif;
   font-size: 2rem;
@@ -464,7 +463,7 @@ a:hover { color: var(--text-primary); }
   align-items: baseline;
   gap: 1rem;
   padding: 0.3rem 0;
-  border-bottom: 1px solid rgba(51,51,51,0.6);
+  border-bottom: 1px solid rgba(249, 223, 223, 0.8);
 }
 
 .project-stat-row:last-child {
@@ -490,10 +489,10 @@ a:hover { color: var(--text-primary); }
 
 /* ── error banner ── */
 .stats-error-banner {
-  background: rgba(207,102,121,0.07);
-  border: 1px solid rgba(207,102,121,0.25);
+  background: rgba(245, 175, 175, 0.12);
+  border: 1px solid rgba(245, 175, 175, 0.45);
   border-radius: var(--radius-sm);
-  color: #cf6679;
+  color: #b03a3a;
   font-size: 0.8rem;
   padding: 0.7rem 1rem;
   margin-bottom: 1rem;
@@ -552,7 +551,7 @@ a:hover { color: var(--text-primary); }
   margin-bottom: 1rem;
   transition: border-color 0.2s;
 }
-.admin-message-card:hover { border-color: #555555; }
+.admin-message-card:hover { border-color: var(--rose-warm); }
 .admin-message-card strong {
   font-family: "Syne", sans-serif;
   font-size: 0.85rem;
@@ -570,9 +569,9 @@ a:hover { color: var(--text-primary); }
 
 /* ── Global Buttons ── */
 button {
-  background: #333333;
+  background: var(--rose-mid);
   color: var(--text-primary);
-  border: 1px solid #555555;
+  border: 1px solid var(--rose-warm);
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -584,8 +583,8 @@ button {
   transition: background 0.2s, border-color 0.2s;
 }
 button:hover {
-  background: #555555;
-  border-color: #777777;
+  background: var(--rose-warm);
+  border-color: var(--rose-deep);
 }
 
 /* ── Comments ── */
@@ -623,8 +622,8 @@ form textarea {
 form input:focus,
 form textarea:focus {
   outline: none;
-  border-color: #555555;
-  box-shadow: 0 0 0 3px rgba(85,85,85,0.1);
+  border-color: var(--rose-warm);
+  box-shadow: 0 0 0 3px rgba(245, 175, 175, 0.15);
 }
 
 form input::placeholder,
@@ -647,12 +646,12 @@ form button { width: 100%; }
   position: absolute;
   left: 0; top: 20%; bottom: 20%;
   width: 2px;
-  background: #555555;
+  background: var(--rose-warm);
   border-radius: 0 2px 2px 0;
   opacity: 0;
   transition: opacity 0.2s;
 }
-.comment:hover { border-color: #555555; }
+.comment:hover { border-color: var(--rose-warm); }
 .comment:hover::before { opacity: 1; }
 
 .comment strong {
@@ -674,7 +673,7 @@ form button { width: 100%; }
 }
 .comment-actions button:hover {
   color: var(--text-primary);
-  border-color: #555555;
+  border-color: var(--rose-warm);
   background: var(--accent-dim);
   box-shadow: none;
 }
@@ -712,9 +711,9 @@ form button { width: 100%; }
 .hex img {
   width: 58%;
   transition: transform 0.3s, filter 0.3s;
-  filter: grayscale(50%) brightness(0.85);
+  filter: grayscale(20%) brightness(0.95) sepia(10%);
 }
-.hex-in:hover { background: rgba(85,85,85,0.2); box-shadow: var(--accent-glow); }
+.hex-in:hover { background: rgba(245, 175, 175, 0.2); box-shadow: var(--accent-glow); }
 .hex-in:hover img { transform: scale(1.12); filter: grayscale(0%) brightness(1); }
 
 /* ── Responsive ── */
