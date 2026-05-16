@@ -112,9 +112,11 @@ color:var(--accent);
 
 display:flex;
 
-justify-content:center;
+justify-content:space-between;
 
 align-items:center;
+
+padding:0 2rem;
 
 position:sticky;
 
@@ -129,6 +131,29 @@ background:rgba(5,8,22,.75);
 border-bottom:1px solid var(--border);
 
 }
+
+.nav-left{
+
+display:flex;
+
+align-items:center;
+
+gap:1rem;
+
+}
+
+.nav-right{
+
+display:flex;
+
+align-items:center;
+
+margin-left:auto;
+
+}
+
+
+/* NORMAL LINKS */
 
 .navbar a{
 
@@ -175,6 +200,106 @@ width:70%;
 .navbar a:hover{
 
 text-shadow:var(--glow);
+
+}
+
+
+/* SECRET LOGIN ICON */
+
+.secret-login{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:1.4rem;
+
+padding:.5rem;
+
+margin-left:1rem;
+
+opacity:.35;
+
+color:var(--accent);
+
+border-radius:50%;
+
+transition:.4s;
+
+}
+
+.secret-login::after{
+
+display:none;
+
+}
+
+.secret-login:hover{
+
+opacity:1;
+
+transform:rotate(180deg);
+
+text-shadow:var(--glow);
+
+box-shadow:
+0 0 15px rgba(0,229,255,.5);
+
+}
+
+
+/* LOGOUT */
+
+.logout-btn-nav{
+
+background:none;
+
+border:none;
+
+box-shadow:none;
+
+color:var(--text-muted);
+
+font-family:"Syne";
+
+font-size:.75rem;
+
+cursor:pointer;
+
+}
+
+.logout-btn-nav:hover{
+
+color:var(--accent);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.navbar{
+
+padding:0 1rem;
+
+}
+
+.navbar a{
+
+padding:1rem .8rem;
+
+font-size:.7rem;
+
+}
+
+.secret-login{
+
+font-size:1.1rem;
+
+}
 
 }
 
