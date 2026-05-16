@@ -34,12 +34,6 @@ type="video/mp4"
 
 <div className="contact-card">
 
-<h2>
-
-Contact
-
-</h2>
-
 
 <a
 
