@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import skyVideo from "../assets/sky.mp4";
+
 import Maze from "../components/Maze";
 import { getComments } from "../services/comments";
 import CommentForm from "../components/comments/CommentForm";
@@ -29,9 +31,11 @@ function Home() {
   useEffect(() => {
     getComments()
       .then((res) => setComments(res.data))
-      .catch(() => {}); // graceful — page still works without comments
+      .catch(() => {});
 
-    fetch("/api/track-visit", { method: "POST" }).catch(() => {});
+    fetch("/api/track-visit", {
+      method: "POST",
+    }).catch(() => {});
   }, []);
 
   const handleAdd = (comment) => {
@@ -44,30 +48,55 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* Intro */}
-      <div className="intro-section">
-        <h1>Hi, I&apos;m a self-taught web developer transitioning from sales.</h1>
-        <p>
-          I am deeply focused on backend development, building scalable and
-          efficient server-side applications. My goal is to advance into machine
-          learning with a specialization in reinforcement learning.
-        </p>
-      </div>
+
+      {/* Intro Hero Section */}
+
+      <section className="intro-section">
+
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="bg-video"
+        >
+          <source src={skyVideo} type="video/mp4" />
+        </video>
+
+        <div className="intro-content">
+          <h1>
+            Hi, I&apos;m a self-taught web developer transitioning from sales.
+          </h1>
+
+          <p>
+            I am deeply focused on backend development, building scalable
+            and efficient server-side applications. My goal is to advance
+            into machine learning with a specialization in reinforcement
+            learning.
+          </p>
+        </div>
+
+      </section>
 
       {/* Tech Stack */}
+
       <div className="tech-stack-section">
         <Maze />
       </div>
 
       {/* Comments */}
+
       <section className="comments-section">
         <h2>Leave a message</h2>
+
         <CommentForm onAdd={handleAdd} />
+
         <CommentList
           comments={buildCommentTree(comments)}
           onReply={handleReply}
         />
       </section>
+
     </div>
   );
 }

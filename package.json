@@ -4,5 +4,8 @@
   "description": "Full stack portfolio project",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lottie-react": "^2.4.1"
   }
 }
