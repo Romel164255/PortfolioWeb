@@ -747,6 +747,20 @@ font-size:2rem;
 
 /* FIXED PAGE VIDEO */
 
+.projects-page,
+.contact-page{
+
+position:relative;
+
+min-height:100vh;
+
+isolation:isolate; /* create own stacking context */
+
+}
+
+
+/* VIDEO */
+
 .page-video-bg{
 
 position:fixed;
@@ -754,17 +768,17 @@ position:fixed;
 top:0;
 left:0;
 
-width:100vw;
-height:100vh;
+width:100%;
+height:100%;
 
 object-fit:cover;
 
-z-index:-2;
+z-index:-1;
 
 }
 
 
-/* DARK OVERLAY */
+/* OVERLAY */
 
 .page-overlay{
 
@@ -776,22 +790,29 @@ left:0;
 width:100%;
 height:100%;
 
-background:rgba(0,0,0,.55);
+background:rgba(0,0,0,.65);
 
-z-index:-1;
+z-index:0;
 
 }
 
 
-/* PAGE CONTENT */
+/* ACTUAL CONTENT */
 
-.projects-page,
-.contact-page{
+.homepage-1,
+.contact-card{
 
 position:relative;
 
-min-height:100vh;
+z-index:2;
 
-z-index:1;
+}
+
+
+/* give projects room */
+
+.homepage-1{
+
+padding:5rem 2rem;
 
 }
