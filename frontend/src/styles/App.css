@@ -816,3 +816,36 @@ z-index:2;
 padding:5rem 2rem;
 
 }
+/* CONTACT SPACE ICON */
+
+.space-link{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:6rem;
+
+margin-top:2rem;
+
+color:var(--accent);
+
+opacity:.8;
+
+transition:.5s;
+
+}
+
+.space-link:hover{
+
+transform:
+rotate(15deg)
+scale(1.1);
+
+text-shadow:var(--glow);
+
+opacity:1;
+
+}

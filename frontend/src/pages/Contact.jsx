@@ -1,11 +1,13 @@
 import blackholeVideo from "../assets/blackhole.mp4";
-import contactImg from "../assets/contact.png";
+import { GiRingedPlanet } from "react-icons/gi";
 
-function Contact(){
+function Contact() {
 
-return(
+return (
 
 <div className="contact-page">
+
+{/* VIDEO */}
 
 <video
 autoPlay
@@ -22,26 +24,38 @@ type="video/mp4"
 
 </video>
 
+
+{/* OVERLAY */}
+
 <div className="page-overlay"></div>
+
+
+{/* CARD */}
 
 <div className="contact-card">
 
-<h2>Contact</h2>
+<h2>
 
-<img
-src={contactImg}
-alt="Contact info"
-onClick={()=>
-window.open(
-contactImg,
-"_blank"
-)
-}
-/>
+Contact
 
-<p className="hint">
-Hint: Try opening this image somewhere unusual.
-</p>
+</h2>
+
+
+<a
+
+href="#"
+
+className="space-link"
+
+onClick={(e)=>e.preventDefault()}
+
+title="Coming Soon"
+
+>
+
+<GiRingedPlanet/>
+
+</a>
 
 </div>
 
