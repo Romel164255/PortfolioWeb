@@ -1,31 +1,27 @@
 import smokeVideo from "../assets/smoke.mp4";
+import ecommerceImg from "../assets/ecommerce.png";
+import cyphrChatImg from "../assets/cyphrChat.png";
 
 function Projects() {
 
   const projectList = [
 
+    
     {
-      id:1,
-      title:"Full Stack E-Commerce Platform",
+    id:1,
+    title:"Full Stack E-Commerce Platform",
+    description:
+    "A complete e-commerce application with authentication, cart, checkout, admin dashboard and JWT-based authorization.",
 
-      description:
-      "A complete e-commerce application with authentication, cart, checkout, admin dashboard and JWT-based authorization.",
+    tech:["React","TypeScript","Express","PostgreSQL","JWT"],
 
-      tech:[
-        "React",
-        "Node.js",
-        "Express",
-        "PostgreSQL",
-        "JWT"
-      ],
+    liveLink:
+    "https://e-commerce-hazel-chi.vercel.app/?page=1",
 
-      liveLink:
-      "https://e-commerce-hazel-chi.vercel.app/?page=1",
+    githubLink:
+    "https://github.com/Romel164255/E-commerce.git",
 
-      githubLink:
-      "https://github.com/Romel164255/E-commerce.git",
-
-      image:"/images/ecommerce.png"
+    image:ecommerceImg
     },
 
     {
@@ -59,25 +55,19 @@ function Projects() {
       title:"Real-Time Chat Application",
 
       description:
-      "A full-stack real-time chat application with Firebase authentication and WebSocket-based messaging using Socket.IO.",
+      "A full-stack real-time chat application with Firebase authentication and WebSocket-based messaging and real-time video calling  using Socket.IO and webRTC.",
 
-      tech:[
-        "React",
-        "Node.js",
-        "Express",
-        "Socket.IO",
-        "PostgreSQL",
-        "Firebase Auth"
-      ],
+      tech:["React", "Node.js", "Express", "Socket.IO", "PostgreSQL", "Firebase Auth", "WebRTC"
+    ],
 
-      liveLink:
-      "https://chatty-phi-ten.vercel.app/",
+    liveLink:
+    "https://chatty-phi-ten.vercel.app/",
 
-      githubLink:
-      "https://github.com/Romel164255/rChat.git",
+    githubLink:
+    "https://github.com/Romel164255/rChat.git",
 
-      image:"/images/rchat.png"
-    }
+    image:cyphrChatImg
+}
 
   ];
 
