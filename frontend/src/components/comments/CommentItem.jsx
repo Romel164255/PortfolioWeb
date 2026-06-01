@@ -6,7 +6,7 @@ function countTotalReplies(comment) {
 
   return comment.replies.reduce(
     (total, reply) => total + 1 + countTotalReplies(reply),
-    0
+    0,
   );
 }
 
@@ -50,11 +50,7 @@ function CommentItem({ comment, onReply }) {
       {showReplies && (
         <div className="replies">
           {comment.replies.map((r) => (
-            <CommentItem
-              key={r.id}
-              comment={r}
-              onReply={onReply}
-            />
+            <CommentItem key={r.id} comment={r} onReply={onReply} />
           ))}
         </div>
       )}

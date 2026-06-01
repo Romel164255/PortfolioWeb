@@ -48,18 +48,10 @@ function Home() {
 
   return (
     <div className="home-container">
-
       {/* Intro Hero Section */}
 
       <section className="intro-section">
-
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="bg-video"
-        >
+        <video autoPlay muted loop playsInline className="bg-video">
           <source src={skyVideo} type="video/mp4" />
         </video>
 
@@ -69,13 +61,11 @@ function Home() {
           </h1>
 
           <p>
-            I am deeply focused on backend development, building scalable
-            and efficient server-side applications. My goal is to advance
-            into machine learning with a specialization in reinforcement
-            learning.
+            I am deeply focused on backend development, building scalable and
+            efficient server-side applications. My goal is to advance into
+            machine learning with a specialization in reinforcement learning.
           </p>
         </div>
-
       </section>
 
       {/* Tech Stack */}
@@ -96,7 +86,6 @@ function Home() {
           onReply={handleReply}
         />
       </section>
-
     </div>
   );
 }

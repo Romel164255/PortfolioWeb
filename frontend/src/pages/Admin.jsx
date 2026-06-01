@@ -54,10 +54,10 @@ function SkeletonCard() {
 }
 
 function Admin() {
-  const [data, setData]                 = useState(null);
+  const [data, setData] = useState(null);
   const [projectStats, setProjectStats] = useState(null);
   const [statsLoading, setStatsLoading] = useState(true);
-  const [statsError, setStatsError]     = useState("");
+  const [statsError, setStatsError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,7 +79,9 @@ function Admin() {
         setProjectStats(statsRes.data);
       } catch (err) {
         console.error("Project stats error:", err);
-        setStatsError("Could not load project stats. The external APIs may be down.");
+        setStatsError(
+          "Could not load project stats. The external APIs may be down.",
+        );
       } finally {
         setStatsLoading(false);
       }
@@ -130,15 +132,18 @@ function Admin() {
       {/* ── Project Stats ── */}
       <section>
         <h2>Live Project Stats</h2>
-        <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginBottom: "1.2rem" }}>
-          Fetched live from each project's <code>/api/stats</code> endpoint via the backend aggregator.
+        <p
+          style={{
+            color: "var(--text-muted)",
+            fontSize: "0.8rem",
+            marginBottom: "1.2rem",
+          }}
+        >
+          Fetched live from each project's <code>/api/stats</code> endpoint via
+          the backend aggregator.
         </p>
 
-        {statsError && (
-          <div className="stats-error-banner">
-            ⚠ {statsError}
-          </div>
-        )}
+        {statsError && <div className="stats-error-banner">⚠ {statsError}</div>}
 
         <div className="stats-row">
           {statsLoading ? (
@@ -149,9 +154,9 @@ function Admin() {
             </>
           ) : projectStats ? (
             <>
-              <StatBlock title="RChat"        stats={projectStats.rchat} />
+              <StatBlock title="RChat" stats={projectStats.rchat} />
               <StatBlock title="URL Shortener" stats={projectStats.shortener} />
-              <StatBlock title="E-Commerce"   stats={projectStats.ecommerce} />
+              <StatBlock title="E-Commerce" stats={projectStats.ecommerce} />
             </>
           ) : null}
         </div>

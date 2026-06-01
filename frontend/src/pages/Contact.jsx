@@ -2,61 +2,32 @@ import blackholeVideo from "../assets/blackhole.mp4";
 import { GiRingedPlanet } from "react-icons/gi";
 
 function Contact() {
+  return (
+    <div className="contact-page">
+      {/* VIDEO */}
 
-return (
+      <video autoPlay muted loop playsInline className="page-video-bg">
+        <source src={blackholeVideo} type="video/mp4" />
+      </video>
 
-<div className="contact-page">
+      {/* OVERLAY */}
 
-{/* VIDEO */}
+      <div className="page-overlay"></div>
 
-<video
-autoPlay
-muted
-loop
-playsInline
-className="page-video-bg"
->
+      {/* CARD */}
 
-<source
-src={blackholeVideo}
-type="video/mp4"
-/>
-
-</video>
-
-
-{/* OVERLAY */}
-
-<div className="page-overlay"></div>
-
-
-{/* CARD */}
-
-<div className="contact-card">
-
-
-<a
-
-href="#"
-
-className="space-link"
-
-onClick={(e)=>e.preventDefault()}
-
-title="Coming Soon"
-
->
-
-<GiRingedPlanet/>
-
-</a>
-
-</div>
-
-</div>
-
-)
-
+      <div className="contact-card">
+        <a
+          href="#"
+          className="space-link"
+          onClick={(e) => e.preventDefault()}
+          title="Coming Soon"
+        >
+          <GiRingedPlanet />
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default Contact;

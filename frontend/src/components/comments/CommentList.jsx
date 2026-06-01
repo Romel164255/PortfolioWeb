@@ -4,11 +4,7 @@ function CommentList({ comments, onReply }) {
   return (
     <div>
       {comments.map((c) => (
-        <CommentItem
-          key={c.id}
-          comment={c}
-          onReply={onReply}
-        />
+        <CommentItem key={c.id} comment={c} onReply={onReply} />
       ))}
     </div>
   );

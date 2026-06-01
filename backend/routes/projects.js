@@ -32,19 +32,17 @@ async function safeFetch(url) {
 
 router.get("/stats", async (req, res) => {
   try {
-
     const [rchat, shortener, ecommerce] = await Promise.all([
       safeFetch("https://chatty-d7l7.onrender.com/api/stats"),
       safeFetch("https://url-shortener-edwl.onrender.com/api/stats"),
-      safeFetch("https://e-commerce-hjy2.onrender.com/api/stats")
+      safeFetch("https://e-commerce-hjy2.onrender.com/api/stats"),
     ]);
 
     res.json({
       rchat,
       shortener,
-      ecommerce
+      ecommerce,
     });
-
   } catch (err) {
     console.error("Stats error:", err);
     res.status(500).json({ error: "Failed to fetch project stats" });

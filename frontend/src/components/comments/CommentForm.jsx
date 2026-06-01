@@ -2,10 +2,10 @@ import { useState } from "react";
 import { createComment } from "../../services/comments";
 
 function CommentForm({ onAdd, parentId = null }) {
-  const [name, setName]       = useState("");
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState("");
+  const [error, setError] = useState("");
 
   const submit = async (e) => {
     e.preventDefault();
@@ -39,7 +39,17 @@ function CommentForm({ onAdd, parentId = null }) {
         onChange={(e) => setMessage(e.target.value)}
         rows={3}
       />
-      {error && <p style={{ color: "#cf6679", fontSize: "0.8rem", marginBottom: "0.5rem" }}>{error}</p>}
+      {error && (
+        <p
+          style={{
+            color: "#cf6679",
+            fontSize: "0.8rem",
+            marginBottom: "0.5rem",
+          }}
+        >
+          {error}
+        </p>
+      )}
       <button type="submit" disabled={loading}>
         {loading ? "Posting…" : parentId ? "Reply" : "Post"}
       </button>

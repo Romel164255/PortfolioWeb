@@ -7,7 +7,7 @@ import { pool } from "../db.js";
 dotenv.config();
 const router = express.Router();
 
-const ADMIN_EMAIL    = process.env.ADMIN_EMAIL;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // BUG FIX: hash once at startup — was re-hashing on every login attempt,
@@ -36,18 +36,16 @@ router.post("/login", async (req, res) => {
     return res.status(401).json({ error: "Invalid credentials" });
   }
 
-  const hash  = await getPasswordHash();
+  const hash = await getPasswordHash();
   const valid = await bcrypt.compare(password, hash);
 
   if (!valid) {
     return res.status(401).json({ error: "Invalid credentials" });
   }
 
-  const accessToken = jwt.sign(
-    { email },
-    process.env.ACCESS_SECRET,
-    { expiresIn: "15m" }
-  );
+  const accessToken = jwt.sign({ email }, process.env.ACCESS_SECRET, {
+    expiresIn: "15m",
+  });
 
   res.json({ accessToken });
 });
@@ -72,7 +70,7 @@ router.get("/admin", async (req, res) => {
     res.json({
       totalVisitors: visitors.rows[0].count,
       totalMessages: messages.rowCount,
-      messages:      messages.rows,
+      messages: messages.rows,
     });
   } catch (err) {
     if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {

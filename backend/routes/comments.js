@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
       `INSERT INTO comments (name, message, parent_id, user_id)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [name.trim(), message.trim(), parent_id, user_id]
+      [name.trim(), message.trim(), parent_id, user_id],
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {

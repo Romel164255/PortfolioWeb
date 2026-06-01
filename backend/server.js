@@ -18,7 +18,7 @@ app.use(
       ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
       : [],
     credentials: true,
-  })
+  }),
 );
 
 /* ---------- ROUTES ---------- */

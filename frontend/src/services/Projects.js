@@ -5,5 +5,4 @@ import api from "./api";
  * Endpoint: GET /api/projects/stats
  * Returns: { rchat, shortener, ecommerce }
  */
-export const getProjectStats = () =>
-  api.get("/api/projects/stats");
+export const getProjectStats = () => api.get("/api/projects/stats");
