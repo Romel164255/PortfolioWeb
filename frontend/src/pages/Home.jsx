@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import skyVideo from "../assets/sky.mp4";
+import binaryVideo from "../assets/binary.mp4";
 
 import Maze from "../components/Maze";
 import { getComments } from "../services/comments";
@@ -52,7 +52,7 @@ function Home() {
 
       <section className="intro-section">
         <video autoPlay muted loop playsInline className="bg-video">
-          <source src={skyVideo} type="video/mp4" />
+          <source src={binaryVideo} type="video/mp4" />
         </video>
 
         <div className="intro-content">

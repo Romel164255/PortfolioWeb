@@ -1,4 +1,4 @@
-import blackholeVideo from "../assets/blackhole.mp4";
+import binaryVideo from "../assets/binary.mp4";
 import { GiRingedPlanet } from "react-icons/gi";
 
 function Contact() {
@@ -7,7 +7,7 @@ function Contact() {
       {/* VIDEO */}
 
       <video autoPlay muted loop playsInline className="page-video-bg">
-        <source src={blackholeVideo} type="video/mp4" />
+        <source src={binaryVideo} type="video/mp4" />
       </video>
 
       {/* OVERLAY */}

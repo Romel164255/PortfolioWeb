@@ -1,4 +1,4 @@
-import smokeVideo from "../assets/smoke.mp4";
+import binaryVideo from "../assets/binary.mp4";
 import ecommerceImg from "../assets/ecommerce.png";
 import cyphrChatImg from "../assets/cyphrChat.png";
 
@@ -67,7 +67,7 @@ function Projects() {
       {/* BACKGROUND VIDEO */}
 
       <video autoPlay muted loop playsInline className="page-video-bg">
-        <source src={smokeVideo} type="video/mp4" />
+        <source src={binaryVideo} type="video/mp4" />
       </video>
 
       {/* DARK OVERLAY */}
